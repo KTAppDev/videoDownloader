@@ -3,8 +3,8 @@ from pytube import Search
 from pytube import Playlist
 
 
-def ut(link):
-    yt = YouTube(link)
+def youtube_single_download(link):
+    yt = YouTube(link[0])
     yt.streams.filter(only_audio=True)
     print("Starting download....")
     stream = yt.streams.get_by_itag(140)
@@ -32,4 +32,4 @@ def download_playlist():
     print('*' * 40)
     for url in playlist[:3]:
         # YouTube(url).streams.filter(only_audio=True).first().download()
-        ut(url)
+        youtube_single_download(url)
