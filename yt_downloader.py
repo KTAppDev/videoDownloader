@@ -26,8 +26,9 @@ def searchtube(txt):
     return video_list
 
 
-def download_youtube_playlist(pl):
+def download_youtube_playlist():
     print('playlist func ran')
+    pl = input('Paste playlist here >')
     playlist = Playlist(pl)
     print('*' * 40)
     print(f'Playlist contains {len(playlist)} items')
