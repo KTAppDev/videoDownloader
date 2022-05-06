@@ -1,5 +1,9 @@
 #:import utils kivy.utils
 <MyGrid>
+    link: link
+    op_input: op_input
+    update_label: update_label
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -22,6 +26,7 @@
                 spacing: 5
 
                 TextInput:
+                    id: op_input
                     multiline:False
                     padding: (5, 10, 5, 5)
                     size_hint: (.2, None)
@@ -29,6 +34,7 @@
                     hint_text:"Specify folder name here"
 
                 TextInput:
+                    id: link
                     hint_text:"Type song name here"
                     multiline: False
                     padding: (5, 10, 5, 5)
@@ -36,6 +42,7 @@
                     height: 40
 
                 Label:
+                    id: update_label
                     text: 'Updates will appear here'
                     font_size: 12
                     color: utils.get_color_from_hex('#DDDDDD')
@@ -48,4 +55,5 @@
                     size_hint: (None, None)
                     height: 40
                     width: 200
+                    on_press: root.download_button_action()
 

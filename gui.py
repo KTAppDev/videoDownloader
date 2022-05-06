@@ -6,11 +6,18 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 import yt_downloader
+from kivy.properties import ObjectProperty
 from kivy.core.window import Window
+
 Window.size = (550, 600)
 
 class MyGrid(Widget):
-    pass
+    link = ObjectProperty(None)
+    op_input = ObjectProperty(None)
+    update_label = ObjectProperty(None)
+    def download_button_action(self):
+        self.update_label.text = f'downloading {self.link.text}'
+        yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), self.op_input.text)
 
 
 class YoutubeDownloader(App):
