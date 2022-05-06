@@ -6,7 +6,8 @@ from kivy.uix.button import Button
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 import yt_downloader
-
+from kivy.core.window import Window
+Window.size = (550, 600)
 
 class MyGrid(Widget):
     pass
