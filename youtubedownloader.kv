@@ -3,6 +3,7 @@
     link: link
     op_input: op_input
     update_label: update_label
+    download_button: download_button
 
     canvas.before:
         Rectangle:
@@ -10,7 +11,7 @@
             size: self.size
             source: 'bg.png'
     GridLayout:
-        size: root.width - 200, root.height - 100
+        size: root.width - 200, root.height - 200
         pos: 100, 100
         cols: 1
         spacing: 30
@@ -43,7 +44,7 @@
 
                 Label:
                     id: update_label
-                    text: 'Updates will appear here'
+                    text: 'Ready...'
                     font_size: 12
                     color: utils.get_color_from_hex('#DDDDDD')
 
@@ -51,9 +52,10 @@
                 pos: 100, 100
                 cols: 1
                 Button:
+                    id: download_button
                     text: "Download Clean Audio"
                     size_hint: (None, None)
                     height: 40
                     width: 200
-                    on_press: root.download_button_action()
+                    on_release: root.download_button_action()
 

@@ -8,16 +8,25 @@ from kivy.uix.widget import Widget
 import yt_downloader
 from kivy.properties import ObjectProperty
 from kivy.core.window import Window
-
 Window.size = (550, 600)
 
 class MyGrid(Widget):
     link = ObjectProperty(None)
     op_input = ObjectProperty(None)
     update_label = ObjectProperty(None)
+    download_button = ObjectProperty(None)
+
     def download_button_action(self):
-        self.update_label.text = f'downloading {self.link.text}'
-        yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), self.op_input.text)
+        self.update_label.text = 'Searching...'
+        if self.link.text == '':
+            self.update_label.text = 'Error - Please enter a song name and artiste'
+            return
+        if self.op_input.text == '':
+            self.op_input.text = 'Downloads'
+
+        self.update_label.text = f'Downloaded {yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), self.op_input.text)}'
+        self.link.text = ''
+        self.op_input.text = ''
 
 
 class YoutubeDownloader(App):

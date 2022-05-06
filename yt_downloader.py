@@ -4,18 +4,24 @@ from pytube import Playlist
 
 
 def youtube_single_download(link, op):
-    print('single download func ran')
+    if link == []:
+        # print('Error - no song specified or song downloaded already')
+        return
+    # print('single download func ran')
     yt = YouTube(link[0]) # not sure whay i does remove this indexing thing but i suspect its for thwee playlisting to work... after 2 weeks im lost when the program gcrashes lol i need to handle this better asap
-    print(f'single download func debug 2 {yt}')
+    # print(f'single download func debug 2 {yt}')
     yt.streams.filter(only_audio=True)
-    print("Starting download....")
+    # print("Starting download....")
     stream = yt.streams.get_by_itag(140)
     stream.download(output_path=op)
-    print("Download complete!")
+    # print("Download complete!")
+    return yt.title
 
 
 def searchtube(txt):
-    print('search func ran')
+    if txt == '':
+        return []
+    # print('search func ran')
     video_list = []
     s = Search(f'{txt} clean audio')
     for obj in s.results:
@@ -24,7 +30,7 @@ def searchtube(txt):
         video_id = x[x.rfind('=') + 1:].strip('>')
         video_url = f'https://www.youtube.com/watch?v={video_id}'
         video_list.append(video_url)
-    print(f'search complete {video_list}')
+    # print(f'search complete {video_list}')
     return video_list
 
 
