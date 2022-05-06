@@ -1,0 +1,51 @@
+#:import utils kivy.utils
+<MyGrid>
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'bg.png'
+    GridLayout:
+        size: root.width - 200, root.height - 100
+        pos: 100, 100
+        cols: 1
+        spacing: 30
+        Image:
+            source: 'ytlogo.png'
+
+        GridLayout:
+            cols:1
+            spacing: 40
+
+            GridLayout:
+                cols:1
+                spacing: 5
+
+                TextInput:
+                    multiline:False
+                    padding: (5, 10, 5, 5)
+                    size_hint: (.2, None)
+                    height: 40
+                    hint_text:"Specify folder name here"
+
+                TextInput:
+                    hint_text:"Type song name here"
+                    multiline: False
+                    padding: (5, 10, 5, 5)
+                    size_hint: (1, None)
+                    height: 40
+
+                Label:
+                    text: 'Updates will appear here'
+                    font_size: 12
+                    color: utils.get_color_from_hex('#DDDDDD')
+
+            GridLayout:
+                pos: 100, 100
+                cols: 1
+                Button:
+                    text: "Download Clean Audio"
+                    size_hint: (None, None)
+                    height: 40
+                    width: 200
+
