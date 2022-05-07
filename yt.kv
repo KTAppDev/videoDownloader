@@ -1,22 +1,25 @@
 #:import utils kivy.utils
-<MyGrid>
+
+MyGrid:
     link: link
     op_input: op_input
     update_label: update_label
     download_button: download_button
 
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'bg.png'
+            source: root.main_canv_image
     GridLayout:
+
         size: root.width - 200, root.height - 200
         pos: 100, 100
         cols: 1
         spacing: 30
         Image:
-            source: 'ytlogo.png'
+            source: root.yt_logo
 
         GridLayout:
             cols:1
