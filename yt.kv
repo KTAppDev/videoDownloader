@@ -8,6 +8,7 @@ MyGrid:
     chk: chk
     mute_label: mute_label
 
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -53,15 +54,18 @@ MyGrid:
                 spacing: 10
 
                 Button:
+                    background_normal: ''
+                    background_color: .75, 0, 0, 1
                     id: download_button
                     text: "Download Clean Audio"
                     font_size: 0.55 * self.height
-                    size_hint: (.4, 1)
+                    size_hint: (None, 1)
                     #font_size_hint: 12
                     #height: 40
-                    #width: 200
+                    width: 200
                     on_press: update_label.text = 'Searching...'
                     on_release: root.download_button_action()
+
 
 
                 GridLayout:
@@ -75,7 +79,7 @@ MyGrid:
 
                     StackLayout:
 
-                        spacing: 10
+                        spacing: 15
 
                         CheckBox:
                             id: chk

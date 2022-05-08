@@ -8,10 +8,8 @@ from kivy.lang import Builder
 import ssl
 from kivy.core.audio import SoundLoader
 
+ssl._create_default_https_context = ssl._create_unverified_context  # important
 
-
-
-ssl._create_default_https_context = ssl._create_unverified_context #important
 
 def resource_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
@@ -31,7 +29,8 @@ class MyGrid(Widget):
     yt_logo = resource_path('ytlogo.png')
 
     def download_button_action(self):
-        sound = SoundLoader.load(resource_path('finish.wav'))
+        if resource_path('finish.wav'):
+            sound = SoundLoader.load(resource_path('finish.wav'))
 
         if self.link.text == '':
             self.update_label.text = 'Error - Please enter a song name and artiste'
@@ -39,10 +38,8 @@ class MyGrid(Widget):
         if self.op_input.text == '':
             self.op_input.text = 'Downloads'
         self.update_label.text = f'Downloaded {yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), self.op_input.text)}'
-        if self.chk.active:
-            sound.play()
-
-
+        # if self.chk.active:
+        #     sound.play()
 
         self.link.text = ''
         self.op_input.text = ''
