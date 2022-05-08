@@ -13,7 +13,6 @@ def resource_path(relative_path):
     return os.path.join(os.path.abspath("."), relative_path)
 
 
-# kv = Builder.load_file('youtubedownloader.kv')
 class MyGrid(Widget):
     link = ObjectProperty(None)
     op_input = ObjectProperty(None)
@@ -22,8 +21,6 @@ class MyGrid(Widget):
 
     main_canv_image = resource_path('bg.png')
     yt_logo = resource_path('ytlogo.png')
-
-
 
     def download_button_action(self):
         self.update_label.text = ''

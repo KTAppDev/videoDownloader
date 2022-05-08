@@ -52,9 +52,11 @@ MyGrid:
                 Button:
                     id: download_button
                     text: "Download Clean Audio"
-                    size_hint: (None, None)
-                    height: 40
-                    width: 200
+                    #size_hint: (.4, 1)
+                    font_size_hint: 12
+                    #height: 40
+                    #width: 200
+                    on_press: update_label.text = 'Searching...'
                     on_release: root.download_button_action()
 
                 Label:
