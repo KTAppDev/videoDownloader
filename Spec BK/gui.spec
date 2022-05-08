@@ -9,7 +9,7 @@ a = Analysis(
     pathex=[],
     binaries=[],
     datas=[('yt.kv', '.'),
-    ('ytlogo.png', '.'), ('bg.png', '.'), ('finish.wav', '.')],
+    ('ytlogo.png', '.'), ('bg.png', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},

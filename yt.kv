@@ -5,7 +5,8 @@ MyGrid:
     op_input: op_input
     update_label: update_label
     download_button: download_button
-
+    chk: chk
+    mute_label: mute_label
 
     canvas.before:
         Rectangle:
@@ -47,20 +48,39 @@ MyGrid:
 
 
             GridLayout:
-                pos: 100, 100
+                #pos: 100, 100
                 cols: 1
+                spacing: 10
+
                 Button:
                     id: download_button
                     text: "Download Clean Audio"
-                    #size_hint: (.4, 1)
-                    font_size_hint: 12
+                    font_size: 0.55 * self.height
+                    size_hint: (.4, 1)
+                    #font_size_hint: 12
                     #height: 40
                     #width: 200
                     on_press: update_label.text = 'Searching...'
                     on_release: root.download_button_action()
 
-                Label:
-                    id: update_label
-                    text: ''
-                    font_size: 12
-                    color: utils.get_color_from_hex('#DDDDDD')
+
+                GridLayout:
+                    cols: 1
+                    spacing: 20
+                    Label:
+                        id: update_label
+                        text: ''
+                        #font_size: 12
+                        color: utils.get_color_from_hex('#DDDDDD')
+
+                    StackLayout:
+
+                        spacing: 10
+
+                        CheckBox:
+                            id: chk
+                        Label:
+                            id: mute_label
+                            text: 'Mute Sound'
+
+
