@@ -1,12 +1,11 @@
 #:import utils kivy.utils
-MyGrid:
-<MyGrid>:
+BoxLayoutUI:
+
+<BoxLayoutUI>:
     link: link
     op_input: op_input
     update_label: update_label
     download_button: download_button
-    chk: chk
-    mute_label: mute_label
 
 
     canvas.before:
@@ -14,77 +13,51 @@ MyGrid:
             pos: self.pos
             size: self.size
             source: root.main_canv_image
-    GridLayout:
+    spacing: '5dp'
+    orientation: 'vertical'
 
-        size: root.width - 200, root.height - 200
-        pos: 100, 100
-        cols: 1
-        spacing: 30
-        Image:
-            source: root.yt_logo
+    Image:
+        size_hint: (1, 1)
+        pos_hint: {'center_x': .5}
+        source: root.yt_logo
 
-        GridLayout:
-            cols:1
-            spacing: 40
+    TextInput:
+        id: op_input
+        multiline:False
+        padding: (5, 10, 5, 5)
+        pos_hint: {'center_x': .5}
+        size_hint: (.6, None)
+        height: '40dp'
+        hint_text:"Specify folder name here"
 
-            GridLayout:
-                cols:1
-                spacing: 5
+    TextInput:
+        id: link
+        hint_text:"Type song name here"
+        multiline: False
+        padding: (5, 10, 5, 5)
+        pos_hint: {'center_x': .5}
+        size_hint: (.6, None)
+        height: '40dp'
 
-                TextInput:
-                    id: op_input
-                    multiline:False
-                    padding: (5, 10, 5, 5)
-                    size_hint: (.2, None)
-                    height: 40
-                    hint_text:"Specify folder name here"
+    Button:
+        background_normal: ''
+        background_color: .75, 0, 0, 1
+        id: download_button
+        pos_hint: {'center_x': .5}
+        bold: True
+        size_hint: (None, None)
+        text: "Download Clean Audio"
+        height: '40dp'
+        width: '200dp'
+        on_press: update_label.text = 'Searching...'
+        on_release: root.download_button_action()
 
-                TextInput:
-                    id: link
-                    hint_text:"Type song name here"
-                    multiline: False
-                    padding: (5, 10, 5, 5)
-                    size_hint: (1, None)
-                    height: 40
-
-
-            GridLayout:
-                #pos: 100, 100
-                cols: 1
-                spacing: 10
-
-                Button:
-                    background_normal: ''
-                    background_color: .75, 0, 0, 1
-                    id: download_button
-                    text: "Download Clean Audio"
-                    font_size: 0.55 * self.height
-                    size_hint: (None, 1)
-                    #font_size_hint: 12
-                    #height: 40
-                    width: 200
-                    on_press: update_label.text = 'Searching...'
-                    on_release: root.download_button_action()
-
-
-
-                GridLayout:
-                    cols: 1
-                    spacing: 20
-                    Label:
-                        id: update_label
-                        text: ''
-                        #font_size: 12
-                        color: utils.get_color_from_hex('#DDDDDD')
-
-                    StackLayout:
-
-                        spacing: 15
-
-                        CheckBox:
-                            id: chk
-                        Label:
-                            id: mute_label
-                            text: 'Mute Sound'
-
+    Label:
+        id: update_label
+        text: 'This is the update label'
+        #font_size: 12
+        color: utils.get_color_from_hex('#DDDDDD')
+        size_hint: .9, None
+        pos_hint: {'center_x': .5}
+        height: '40dp'
 

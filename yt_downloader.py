@@ -23,7 +23,7 @@ def searchtube(txt):
         return []
     # print('search func ran')
     video_list = []
-    s = Search(f'{txt} clean audio')
+    s = Search(f'{txt} radio edit clean audio')
     for obj in s.results:
         x = str(
             obj)  # in the future see if theyy have an easier way to use these youtube obj in search results. I doubt what i'm doing is the easy way lol
