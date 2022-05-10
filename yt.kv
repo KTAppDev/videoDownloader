@@ -34,7 +34,7 @@ BoxLayoutUI:
         multiline:False
         padding: (5, 10, 5, 5)
         pos_hint: {'center_x': .5}
-        size_hint: (.75, None)
+        size_hint: (.8, None)
         height: '40dp'
         hint_text:"Specify folder name here"
 
@@ -44,9 +44,9 @@ BoxLayoutUI:
         multiline: False
         padding: (5, 10, 5, 5)
         pos_hint: {'center_x': .5}
-        size_hint: (.75, None)
+        size_hint: (.8, None)
         height: '40dp'
-        # on_text_validate: root.callback(link.text)
+        on_text_validate: root.download_button_action()
 
     Button:
         background_normal: ''
