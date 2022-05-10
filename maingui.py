@@ -47,6 +47,7 @@ class BoxLayoutUI(BoxLayout):
 
 class YoutubeDownloader(App):
     def build(self):
+        self.title = 'Youtube Clean Audio Downloader - KTAD'
         kv = Builder.load_file(resource_path('yt.kv'))
         return kv
 
