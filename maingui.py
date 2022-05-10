@@ -54,7 +54,7 @@ class BoxLayoutUI(BoxLayout):
         try:
             rename_file(self.path_to_last_song + '/' + self.update_label.text[11:] + '.mp4')  # remove the word downloaded 11 characters, its the title so i add mp4
         except Exception as e:
-            print('could not rename file because' + e)
+            print('could not rename file because' + str(e))
         self.link.text = ''
         self.op_input.text = ''
 
