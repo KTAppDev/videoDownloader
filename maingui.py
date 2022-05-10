@@ -14,6 +14,7 @@ from kivy.config import Config # used to set window size
 ssl._create_default_https_context = ssl._create_unverified_context  # important used to make internet coms legit
 
 ############Screen size################
+Config.set('graphics', 'resizable', False)
 Config.set('graphics', 'width', '480')
 Config.set('graphics', 'height', '400')
 #######################################
@@ -34,15 +35,16 @@ class BoxLayoutUI(BoxLayout):
 
     def download_button_action(self):
         if self.link.text == '':
-            self.update_label.text = 'Error - Please enter a song name and artiste'
+            self.update_label.text = 'ERROR - Please enter a song name and artiste'
             return
         if self.op_input.text == '':
             self.op_input.text = 'Downloads'
         self.update_label.text = f'Downloaded {yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), self.op_input.text)}'
-
-
         self.link.text = ''
         self.op_input.text = ''
+
+    def callback(self, link):
+        self.update_label = self.link.text
 
 
 class YoutubeDownloader(App):

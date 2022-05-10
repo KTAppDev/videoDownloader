@@ -38,6 +38,7 @@ BoxLayoutUI:
         pos_hint: {'center_x': .5}
         size_hint: (.6, None)
         height: '40dp'
+        # on_text_validate: root.callback(link.text)
 
     Button:
         background_normal: ''
@@ -54,10 +55,12 @@ BoxLayoutUI:
 
     Label:
         id: update_label
-        text: 'This is the update label'
+        text: 'Please enter a song name and artiste'
         #font_size: 12
         color: utils.get_color_from_hex('#DDDDDD')
         size_hint: .9, None
         pos_hint: {'center_x': .5}
         height: '40dp'
+
+
 
