@@ -13,10 +13,9 @@ def youtube_single_download(link, op):
     yt.streams.filter(only_audio=True)
     # print("Starting download....")
     stream = yt.streams.get_by_itag(140)
-    stream.download(output_path=op)
-    # print("Download complete!")
-
-    return yt.title
+    file_path = stream.download(output_path=op)
+    info_list = [yt.title, file_path, yt.vid_info]
+    return info_list
 
 
 

@@ -8,26 +8,23 @@ from kivy.lang import Builder
 import ssl
 from kivy.config import Config  # used to set window size
 
-ssl._create_default_https_context = ssl._create_unverified_context  # important used to make internet coms legit
+ssl._create_default_https_context = ssl._create_unverified_context  # important used to make internet coms legit - windows issue
 
-############Screen size################
+############Window size################
 Config.set('graphics', 'resizable', False)
 Config.set('graphics', 'width', '480')
 Config.set('graphics', 'height', '500')
-
-
 #######################################
 
-def resource_path(relative_path):
+def resource_path(relative_path): #This function gets the absolute pathe of what ever you feed it, just so there is no location issue
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
 
 def rename_file(song_path): #This is my ver own rename function, not sure if this is how everyong does it but it works for me
-    print(song_path)
-    base, ext = song_path.split('.mp4')
-    new_file = base + '.mp3'
+    # print(song_path)
+    new_file = song_path.replace('.mp4', '.mp3') # A simple replace
     os.rename(song_path, new_file)
 
 
@@ -41,22 +38,25 @@ class BoxLayoutUI(BoxLayout):
     yt_logo = resource_path('ytlogo.png')
 
     def download_button_action(self):
-
-        desktop = os.path.expanduser("~/Desktop/")
+        self.download_button.disabled = True
+        desktop = os.path.expanduser("~\\Desktop\\")
         if self.link.text == '':
             self.update_label.text = 'ERROR - Please enter a song name and artiste'
             return
         self.update_label.text = 'Searching...'
         if self.op_input.text == '':
             self.op_input.text = 'Youtube' #Default folder
-        self.path_to_last_song = desktop + self.op_input.text # Made this so i ca reuse it below
-        self.update_label.text = f'Downloaded {yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), self.path_to_last_song)}' #this returns the title and thats the same as the song title
+
+        title_and_filePath = yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), desktop + self.op_input.text)
+        self.update_label.text, file_path, song_info = title_and_filePath
+        print(song_info)
         try:
-            rename_file(self.path_to_last_song + '/' + self.update_label.text[11:] + '.mp4')  # remove the word downloaded 11 characters, its the title so i add mp4
+            rename_file(file_path)  # remove the word downloaded 11 characters, its the title so i add mp4
         except Exception as e:
-            print('could not rename file because' + str(e))
+            print(str(e))
+
         self.link.text = ''
-        self.op_input.text = ''
+        self.download_button.disabled = False
 
 
 class YoutubeDownloader(App):

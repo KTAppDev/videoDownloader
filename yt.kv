@@ -37,6 +37,9 @@ BoxLayoutUI:
         size_hint: (.8, None)
         height: '40dp'
         hint_text:"Specify folder name here"
+        on_text: update_label2.text = 'Song will be saved to desktop/' + op_input.text
+        on_text_validate: link.focus = True
+        on_text_validate: update_label2.text = 'Song will be saved to desktop/' + op_input.text
 
     TextInput:
         id: link
@@ -47,6 +50,10 @@ BoxLayoutUI:
         size_hint: (.8, None)
         height: '40dp'
         on_text_validate: root.download_button_action()
+        on_text_validate: download_button.disabled = True
+        on_text_validate: update_label.text = 'Searching...'
+
+
 
     Button:
         background_normal: ''
