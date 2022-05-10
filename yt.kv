@@ -20,13 +20,21 @@ BoxLayoutUI:
         size_hint: (1, 1)
         pos_hint: {'center_x': .5}
         source: root.yt_logo
+    Label:
+        id: update_label2
+        text: 'Song will be saved to desktop/youtube'
+        #font_size: 8
+        color: utils.get_color_from_hex('#808080')
+        size_hint: .9, None
+        pos_hint: {'center_x': .5}
+        height: '20dp'
 
     TextInput:
         id: op_input
         multiline:False
         padding: (5, 10, 5, 5)
         pos_hint: {'center_x': .5}
-        size_hint: (.6, None)
+        size_hint: (.75, None)
         height: '40dp'
         hint_text:"Specify folder name here"
 
@@ -36,7 +44,7 @@ BoxLayoutUI:
         multiline: False
         padding: (5, 10, 5, 5)
         pos_hint: {'center_x': .5}
-        size_hint: (.6, None)
+        size_hint: (.75, None)
         height: '40dp'
         # on_text_validate: root.callback(link.text)
 

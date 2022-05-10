@@ -2,13 +2,10 @@ import os
 import sys
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.stacklayout import StackLayout
-from kivy.uix.widget import Widget
 import yt_downloader
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 import ssl
-from kivy.core.audio import SoundLoader
 from kivy.config import Config # used to set window size
 
 ssl._create_default_https_context = ssl._create_unverified_context  # important used to make internet coms legit
@@ -16,8 +13,9 @@ ssl._create_default_https_context = ssl._create_unverified_context  # important 
 ############Screen size################
 Config.set('graphics', 'resizable', False)
 Config.set('graphics', 'width', '480')
-Config.set('graphics', 'height', '400')
+Config.set('graphics', 'height', '500')
 #######################################
+
 def resource_path(relative_path):
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, relative_path)
@@ -34,17 +32,17 @@ class BoxLayoutUI(BoxLayout):
     yt_logo = resource_path('ytlogo.png')
 
     def download_button_action(self):
+        desktop = os.path.expanduser("~/Desktop//")
         if self.link.text == '':
             self.update_label.text = 'ERROR - Please enter a song name and artiste'
             return
         if self.op_input.text == '':
-            self.op_input.text = 'Downloads'
-        self.update_label.text = f'Downloaded {yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), self.op_input.text)}'
+            self.op_input.text = 'Youtube'
+        self.update_label.text = f'Downloaded {yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), desktop + self.op_input.text)}'
         self.link.text = ''
         self.op_input.text = ''
 
-    def callback(self, link):
-        self.update_label = self.link.text
+
 
 
 class YoutubeDownloader(App):
