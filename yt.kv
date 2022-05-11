@@ -69,7 +69,7 @@ BoxLayoutUI:
         on_release: root.download_button_action()
     Button:
         background_normal: ''
-        background_color: .20, .5, 0, 1
+        background_color: .10, .5, .1, 1
         id: open_folder
         pos_hint: {'center_x': .5}
         bold: False
@@ -78,7 +78,7 @@ BoxLayoutUI:
         height: '40dp'
         width: '100dp'
         #on_press: update_label.text = 'Searching...'
-        #on_release: root.download_button_action()
+        on_release: root.open_folder()
 
     Label:
         id: update_label

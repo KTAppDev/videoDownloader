@@ -14,18 +14,26 @@ ssl._create_default_https_context = ssl._create_unverified_context  # important 
 Config.set('graphics', 'resizable', False)
 Config.set('graphics', 'width', '480')
 Config.set('graphics', 'height', '500')
+
+
 #######################################
 
-def resource_path(relative_path): #This function gets the absolute pathe of what ever you feed it, just so there is no location issue
+def resource_path(
+        relative_path):  # This function gets the absolute pathe of what ever you feed it, just so there is no location issue
     if hasattr(sys, '_MEIPASS'):
         return os.path.join(sys._MEIPASS, relative_path)
     return os.path.join(os.path.abspath("."), relative_path)
 
 
-def rename_file(song_path): #This is my ver own rename function, not sure if this is how everyong does it but it works for me
+def rename_file(
+        song_path):  # This is my ver own rename function, not sure if this is how everyong does it but it works for me
     # print(song_path)
-    new_file = song_path.replace('.mp4', '.mp3') # A simple replace
+    new_file = song_path.replace('.mp4', '.mp3')  # A simple replace
     os.rename(song_path, new_file)
+
+
+def open_folder(loc):
+    os.startfile(loc)
 
 
 class BoxLayoutUI(BoxLayout):
@@ -45,11 +53,12 @@ class BoxLayoutUI(BoxLayout):
             return
         self.update_label.text = 'Searching...'
         if self.op_input.text == '':
-            self.op_input.text = 'Youtube' #Default folder
+            self.op_input.text = 'Youtube'  # Default folder
 
-        title_and_filePath = yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), desktop + self.op_input.text)
-        self.update_label.text, file_path, song_info = title_and_filePath
-        print(song_info)
+        download_info = yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text),
+                                                                   desktop + self.op_input.text)
+        self.update_label.text, file_path, song_info = download_info
+        #print(song_info)
         try:
             rename_file(file_path)  # remove the word downloaded 11 characters, its the title so i add mp4
         except Exception as e:
