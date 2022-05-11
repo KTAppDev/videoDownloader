@@ -16,8 +16,6 @@ ssl._create_default_https_context = ssl._create_unverified_context  # important 
 Config.set('graphics', 'resizable', False)
 Config.set('graphics', 'width', '480')
 Config.set('graphics', 'height', '500')
-
-
 #######################################
 
 def resource_path(
@@ -34,9 +32,6 @@ def rename_file(
     os.rename(song_path, new_file)
 
 
-
-
-
 class BoxLayoutUI(BoxLayout):
     link = ObjectProperty(None)
     op_input = ObjectProperty(None)
@@ -49,7 +44,7 @@ class BoxLayoutUI(BoxLayout):
     def download_button_action(self):
         self.download_button.disabled = True
         desktop = os.path.expanduser("~\\Desktop\\")
-        print(desktop)
+        # print(desktop)
         if self.link.text == '':
             self.update_label.text = 'ERROR - Please enter a song name and artiste'
             return
@@ -73,20 +68,30 @@ class BoxLayoutUI(BoxLayout):
 
     def open_folder(self):
         desktop = os.path.expanduser("~\\Desktop\\")
-        print(desktop)
+        # print(desktop)
         default_loc = desktop + 'Youtube\\'
-        print(default_loc)
+        # print(default_loc)
         if self.op_input.text == '':
             path = default_loc
         else:
             path = default_loc + self.op_input.text
 
         if platform.system() == "Windows":
-            os.startfile(path)
+            try:
+                os.startfile(path)
+            except Exception as e:
+                print(e)
+
         elif platform.system() == "Darwin":
-            subprocess.Popen(["open", path])
+            try:
+                subprocess.Popen(["open", path])
+            except Exception as e:
+                print(e)
         else:
-            subprocess.Popen(["xdg-open", path])
+            try:
+                subprocess.Popen(["xdg-open", path])
+            except Exception as e:
+                print(e)
 
 
 class YoutubeDownloader(App):
