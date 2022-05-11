@@ -5,6 +5,8 @@ from kivy.uix.boxlayout import BoxLayout
 import yt_downloader
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
+import platform
+import subprocess
 import ssl
 from kivy.config import Config  # used to set window size
 
@@ -32,8 +34,7 @@ def rename_file(
     os.rename(song_path, new_file)
 
 
-def open_folder(loc):
-    os.startfile(loc)
+
 
 
 class BoxLayoutUI(BoxLayout):
@@ -41,24 +42,27 @@ class BoxLayoutUI(BoxLayout):
     op_input = ObjectProperty(None)
     update_label = ObjectProperty(None)
     download_button = ObjectProperty(None)
-
     main_canv_image = resource_path('bg.png')
     yt_logo = resource_path('ytlogo.png')
+
 
     def download_button_action(self):
         self.download_button.disabled = True
         desktop = os.path.expanduser("~\\Desktop\\")
+        print(desktop)
         if self.link.text == '':
             self.update_label.text = 'ERROR - Please enter a song name and artiste'
             return
         self.update_label.text = 'Searching...'
+        default_loc = desktop + 'Youtube\\' # Default folder
         if self.op_input.text == '':
-            self.op_input.text = 'Youtube'  # Default folder
+            download_info = yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), default_loc)
+        else:
+            loc = default_loc + self.op_input.text
+            download_info = yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), loc)
 
-        download_info = yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text),
-                                                                   desktop + self.op_input.text)
         self.update_label.text, file_path, song_info = download_info
-        #print(song_info)
+        # print(song_info)
         try:
             rename_file(file_path)  # remove the word downloaded 11 characters, its the title so i add mp4
         except Exception as e:
@@ -66,6 +70,23 @@ class BoxLayoutUI(BoxLayout):
 
         self.link.text = ''
         self.download_button.disabled = False
+
+    def open_folder(self):
+        desktop = os.path.expanduser("~\\Desktop\\")
+        print(desktop)
+        default_loc = desktop + 'Youtube\\'
+        print(default_loc)
+        if self.op_input.text == '':
+            path = default_loc
+        else:
+            path = default_loc + self.op_input.text
+
+        if platform.system() == "Windows":
+            os.startfile(path)
+        elif platform.system() == "Darwin":
+            subprocess.Popen(["open", path])
+        else:
+            subprocess.Popen(["xdg-open", path])
 
 
 class YoutubeDownloader(App):
