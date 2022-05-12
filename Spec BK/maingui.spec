@@ -1,5 +1,5 @@
-from kivy_deps import sdl2, glew
 # -*- mode: python ; coding: utf-8 -*-
+from kivy_deps import sdl2, glew
 
 
 block_cipher = None
@@ -9,7 +9,7 @@ a = Analysis(
     ['maingui.py'],
     pathex=[],
     binaries=[],
-    datas=[('yt.kv', '.'), ('ytlogo.png', '.'), ('bg.png', '.')],
+    datas=[('yt.kv', '.'), ('ytlogo.png', '.'), ('bg.png', '.'), ('ytlogo_MXG_icon.ico', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -38,6 +38,7 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon='C:\\Users\\kenda\\PycharmProjects\\videoDownloader\\ytlogo_MXG_icon.ico',
 )
 coll = COLLECT(
     exe,
