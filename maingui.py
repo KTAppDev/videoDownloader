@@ -61,7 +61,7 @@ class BoxLayoutUI(BoxLayout):
             return
         self.update_label.text = 'Searching...'
 
-        default_loc = get_os() + '/Youtube'  # Default folder
+        default_loc = get_os() + '/Youtube/'  # Default folder
         if self.op_input.text == '':
             download_info = yt_downloader.youtube_single_download(yt_downloader.searchtube(self.link.text), default_loc)
         else:
@@ -81,14 +81,13 @@ class BoxLayoutUI(BoxLayout):
     def open_folder(self):
         #desktop = os.path.expanduser("~\\Desktop\\")
         # print(desktop)
-        default_loc = get_os() + '/Youtube'
+        default_loc = get_os() + '\\Youtube\\'
         # print(default_loc)
         if self.op_input.text == '':
             path = default_loc
         else:
             path = default_loc + self.op_input.text
-
-        if platform == "windows":
+        if platform == "win32":
             try:
                 os.startfile(path)
             except Exception as e:
